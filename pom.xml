@@ -14,6 +14,11 @@
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>bouncycastle</groupId>
+      <artifactId>bcprov-jdk16</artifactId>
+      <version>140</version>
+    </dependency>
   </dependencies>
   <properties>
     <jdk.version>11</jdk.version>
