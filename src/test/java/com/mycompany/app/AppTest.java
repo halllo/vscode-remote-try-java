@@ -56,4 +56,30 @@ public class AppTest {
             assertTrue("Exception during encryption/decryption: " + e.getMessage(), false);
         }
     }
+
+    @Test
+    public void download() {
+        try {
+            java.net.URI uri = new java.net.URI("https://www.example.com");
+            java.net.URL url = uri.toURL();
+            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            int responseCode = conn.getResponseCode();
+            assertTrue(responseCode == 200);
+
+            java.io.BufferedReader in = new java.io.BufferedReader(
+                new java.io.InputStreamReader(conn.getInputStream(), "UTF-8"));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
+            }
+            in.close();
+
+            assertTrue(response.toString().contains("<html"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            assertTrue("Exception during HTTP request: " + e.getMessage(), false);
+        }
+    }
 }
